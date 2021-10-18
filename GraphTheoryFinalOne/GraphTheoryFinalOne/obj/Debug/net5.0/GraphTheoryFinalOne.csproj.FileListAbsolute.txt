@@ -13,3 +13,5 @@ D:\E-LEARNING - FIT\LY THUYET DO THI\Exercise\graph-theory-2\nmt-ht\graph-theory
 D:\E-LEARNING - FIT\LY THUYET DO THI\Exercise\graph-theory-2\nmt-ht\graph-theory-final-1\GraphTheoryFinalOne\GraphTheoryFinalOne\obj\Debug\net5.0\ref\GraphTheoryFinalOne.dll
 D:\E-LEARNING - FIT\LY THUYET DO THI\Exercise\graph-theory-2\nmt-ht\graph-theory-final-1\GraphTheoryFinalOne\GraphTheoryFinalOne\obj\Debug\net5.0\GraphTheoryFinalOne.pdb
 D:\E-LEARNING - FIT\LY THUYET DO THI\Exercise\graph-theory-2\nmt-ht\graph-theory-final-1\GraphTheoryFinalOne\GraphTheoryFinalOne\obj\Debug\net5.0\GraphTheoryFinalOne.genruntimeconfig.cache
+D:\E-LEARNING - FIT\LY THUYET DO THI\Exercise\graph-theory-2\nmt-ht\graph-theory-final-1\GraphTheoryFinalOne\GraphTheoryFinalOne\obj\Debug\net5.0\GraphTheoryFinalOne.csproj.AssemblyReference.cache
+D:\E-LEARNING - FIT\LY THUYET DO THI\Exercise\graph-theory-2\nmt-ht\graph-theory-final-1\GraphTheoryFinalOne\GraphTheoryFinalOne\bin\Debug\net5.0\input.txt
