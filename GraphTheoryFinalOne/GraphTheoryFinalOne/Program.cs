@@ -9,8 +9,8 @@ namespace GraphTheoryFinalOne
 
         static void Main(string[] args)
         {
-            var adjMatrix = Helper.InitAdjacencyMatrix(ADJACENCY_MATRIX_FILE_PATH);
-            Helper.PrintToScreen(adjMatrix);
+            //var adjMatrix = Helper.InitAdjacencyMatrix(ADJACENCY_MATRIX_FILE_PATH);
+            //Helper.PrintToScreen(adjMatrix);
         }
     }
 }

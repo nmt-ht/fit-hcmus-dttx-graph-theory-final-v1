@@ -6,33 +6,27 @@ namespace GraphTheoryFinalOne.Helpers
 {
     public static class Helper
     {
-        public static AdjacencyMatrix InitAdjacencyMatrix(string filePath)
+        public static AdjacencyList InitAdjacencyList(string filePath)
         {
             try
             {
-                if (string.IsNullOrEmpty(filePath))
-                {
-                    Console.WriteLine("The file path cannot be empty.");
-                    Console.ReadLine();
-                    return null;
-                }
-
                 var lines = File.ReadAllLines(filePath);
 
                 int n = int.Parse(lines[0]);
-                int[,] arr = new int[n, n];
+                var al = new AdjacencyList(n);
 
                 for (int i = 0; i < n; i++)
                 {
-                    string[] row = lines[i + 1].Split(" ");
+                    string[] items = lines[i + 1].Split(" ");
+                    int adjacentVertexCount = int.Parse(items[0]);
 
-                    for (int j = 0; j < n; j++)
+                    for (int j = 0; j < adjacentVertexCount; j++)
                     {
-                        arr[i, j] = int.Parse(row[j]);
+                        al.AdjacentVertices[i].AddLast(int.Parse(items[j + 1]));
                     }
                 }
 
-                return new AdjacencyMatrix(n, arr);
+                return al;
             }
             catch (Exception ex)
             {
@@ -43,38 +37,22 @@ namespace GraphTheoryFinalOne.Helpers
             return null;
         }
 
-        public static void PrintToScreen(AdjacencyMatrix adjacencyMatrix)
+        public static void PrintToScreen(AdjacencyList adjacencyList)
         {
-            Console.WriteLine(adjacencyMatrix.N);
+            Console.WriteLine(adjacencyList.N);
 
-            for (int i = 0; i < adjacencyMatrix.N; i++)
+            for (int i = 0; i < adjacencyList.AdjacentVertices.Length; i++)
             {
-                for (int j = 0; j < adjacencyMatrix.N; j++)
+                Console.Write(adjacencyList.AdjacentVertices[i].Count);
+                Console.Write(" ");
+
+                foreach (var item in adjacencyList.AdjacentVertices[i])
                 {
-                    Console.Write(adjacencyMatrix.Array[i, j]);
-                    Console.Write(" ");
+                    Console.Write(item + " ");
                 }
 
-                Console.WriteLine("");
+                Console.WriteLine();
             }
         }
-
-        public static AdjacencyList ConvertToAdjacencyList(AdjacencyMatrix am)
-        {
-            var al = new AdjacencyList(am.N);
-
-            for (int i = 0; i < am.N; i++)
-            {
-                for (int j = 0; j < am.N; j++)
-                {
-                    var value = am.Array[i, j];
-                    if (value > 0)
-                        al.AdjacentVertices[i].AddLast(j);
-                }
-            }
-
-            return al;
-        }
-
     }
 }
