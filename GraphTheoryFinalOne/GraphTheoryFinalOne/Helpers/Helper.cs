@@ -1,32 +1,45 @@
 ﻿using GraphTheoryFinalOne.Models;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace GraphTheoryFinalOne.Helpers
 {
     public static class Helper
     {
-        public static AdjacencyList InitAdjacencyList(string filePath)
+        public static IList<AdjacencyList> InitAdjacencyList(string filePath)
         {
             try
             {
                 var lines = File.ReadAllLines(filePath);
+                int m = int.Parse(lines[0]); // total of adjacency list
+                int n = 0; //index of verties
+                int new_n = 1;
+                IList<AdjacencyList> adjacencyLists = new List<AdjacencyList>();
 
-                int n = int.Parse(lines[0]);
-                var al = new AdjacencyList(n);
-
-                for (int i = 0; i < n; i++)
+                for (int i = 0; i < m; i++)
                 {
-                    string[] items = lines[i + 1].Split(" ");
-                    int adjacentVertexCount = int.Parse(items[0]);
+                    n = int.Parse(lines[new_n]); // number of verties 
+                    var al = new AdjacencyList(n);
+                    var al_index = 0;
 
-                    for (int j = 0; j < adjacentVertexCount; j++)
+                    for (int j = new_n; j < n + new_n; j++)
                     {
-                        al.AdjacentVertices[i].AddLast(int.Parse(items[j + 1]));
+                        string[] items = lines[j + 1].Split(" ");
+                        int adjacentVertexCount = int.Parse(items[0]);
+
+                        for (int z = 0; z < adjacentVertexCount; z++)
+                        {
+                            al.AdjacentVertices[al_index].AddLast(int.Parse(items[z + 1]));
+                        }
+                        al_index++;
                     }
+
+                    adjacencyLists.Add(al);
+                    new_n = new_n + n + 1;
                 }
 
-                return al;
+                return adjacencyLists;
             }
             catch (Exception ex)
             {
