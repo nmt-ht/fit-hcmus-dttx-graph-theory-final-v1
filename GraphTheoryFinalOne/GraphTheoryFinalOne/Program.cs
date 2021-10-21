@@ -16,10 +16,12 @@ namespace GraphTheoryFinalOne
                 var isEmptyGraph = GraphBiz.IsEmptyGraph(adjLst) ? $"k = {adjLst.N}" : "Khong";
                 Console.WriteLine($"1. Do thi trong: {isEmptyGraph}");
                 var isCycleGraph = GraphBiz.IsCycleGrap(adjLst) ? $"k = {adjLst.N}" : "Khong";
-                Console.WriteLine($"2. Do thi vong: {isEmptyGraph}");
-                Console.WriteLine($"3. Do thi hinh con buom: Khong");
+                Console.WriteLine($"2. Do thi vong: {isCycleGraph}");
+                var isButterflyGraph = GraphBiz.IsButterflyGraph(adjLst) ? $"Co" : "Khong";
+                Console.WriteLine($"3. Do thi hinh con buom: {isButterflyGraph}");
                 Console.WriteLine($"4. Do thi hinh con ngai: Khong");
-                Console.WriteLine($"5. Do thi hinh sao: Khong");
+                var isStarGraph = GraphBiz.IsStarGraph(adjLst) ? $"k = {adjLst.N}" : "Khong";
+                Console.WriteLine($"5. Do thi hinh sao: {isStarGraph}");
                 Console.WriteLine($"6. Do thi banh xe: Khong");
                 Console.WriteLine($"7. Do thi Barbell: Khong");
                 Console.WriteLine($"8. Do thi tinh ban: Khong");
