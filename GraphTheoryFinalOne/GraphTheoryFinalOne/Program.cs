@@ -19,7 +19,8 @@ namespace GraphTheoryFinalOne
                 Console.WriteLine($"2. Do thi vong: {isCycleGraph}");
                 var isButterflyGraph = GraphBiz.IsButterflyGraph(adjLst) ? $"Co" : "Khong";
                 Console.WriteLine($"3. Do thi hinh con buom: {isButterflyGraph}");
-                Console.WriteLine($"4. Do thi hinh con ngai: Khong");
+                var isMothGraph = GraphBiz.IsMothGraph(adjLst) ? $"Co" : "Khong";
+                Console.WriteLine($"4. Do thi hinh con ngai: {isMothGraph}");
                 var isStarGraph = GraphBiz.IsStarGraph(adjLst) ? $"k = {adjLst.N}" : "Khong";
                 Console.WriteLine($"5. Do thi hinh sao: {isStarGraph}");
                 var isWheelGraph = GraphBiz.IsWheelGraph(adjLst) ? $"k = {adjLst.N}" : "Khong";
@@ -27,7 +28,6 @@ namespace GraphTheoryFinalOne
                 Console.WriteLine($"7. Do thi Barbell: Khong");
                 Console.WriteLine($"8. Do thi tinh ban: Khong");
                 Console.WriteLine($"9. Do thi k-phan (k > 1): Khong");
-
 
                 Console.WriteLine();
                 Console.WriteLine("\t*****");

@@ -122,6 +122,37 @@ namespace GraphTheoryFinalOne.Handlers
 
         }
 
+        public static bool IsMothGraph(AdjacencyList adjacencyList)
+        {
+            if (IsEmptyGraph(adjacencyList) || adjacencyList.N < 6)
+                return false;
+
+            int vertex1 = 0;
+            int vertex5 = 0;
+            int vertex3 = 0;
+            int vertex2 = 0;
+
+            for (int i = 0; i < adjacencyList.N; i++)
+            {
+                int degreeI = 0;
+                degreeI = adjacencyList.AdjacentVertices[i].Count;
+
+                if (degreeI == 1)
+                    vertex1++;
+                
+                if (degreeI == 1)
+                    vertex2++;
+                
+                if (degreeI == 3)
+                    vertex3++;
+                
+                if (degreeI == 5)
+                    vertex5++;
+            }
+
+            return vertex1 == 2 && vertex2 == 2 && vertex3 == 1 && vertex5 == 1;
+        }
+
         #region Support Function
         public static bool IsUndirectedGraph(AdjacencyList adjacencyList)
         {
