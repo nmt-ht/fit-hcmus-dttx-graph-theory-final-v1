@@ -66,6 +66,29 @@ namespace GraphTheoryFinalOne.Handlers
             return vertexD2 == (adjacencyList.N - 1) && vertexDn_1 == 1;
         }
 
+        public static bool IsWheelGraph(AdjacencyList adjacencyList)
+        {
+            if (IsEmptyGraph(adjacencyList) || adjacencyList.N < 4)
+                return false;
+
+            int vertexD3 = 0;
+            int vertexDn_1 = 0;
+
+            for (int i = 0; i < adjacencyList.N; i++)
+            {
+                int degreeI = 0;
+                degreeI = adjacencyList.AdjacentVertices[i].Count;
+
+                if (degreeI == 3)
+                    vertexD3++;
+                else if (degreeI == adjacencyList.N - 1)
+                    vertexDn_1++;
+            }
+
+            return vertexD3 == (adjacencyList.N - 1) && vertexDn_1 == 1;
+
+        }
+
         public static bool IsStarGraph(AdjacencyList adjacencyList)
         {
             if (IsEmptyGraph(adjacencyList))

@@ -22,7 +22,8 @@ namespace GraphTheoryFinalOne
                 Console.WriteLine($"4. Do thi hinh con ngai: Khong");
                 var isStarGraph = GraphBiz.IsStarGraph(adjLst) ? $"k = {adjLst.N}" : "Khong";
                 Console.WriteLine($"5. Do thi hinh sao: {isStarGraph}");
-                Console.WriteLine($"6. Do thi banh xe: Khong");
+                var isWheelGraph = GraphBiz.IsWheelGraph(adjLst) ? $"k = {adjLst.N}" : "Khong";
+                Console.WriteLine($"6. Do thi banh xe: {isWheelGraph}");
                 Console.WriteLine($"7. Do thi Barbell: Khong");
                 Console.WriteLine($"8. Do thi tinh ban: Khong");
                 Console.WriteLine($"9. Do thi k-phan (k > 1): Khong");
