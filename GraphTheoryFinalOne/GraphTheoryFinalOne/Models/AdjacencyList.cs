@@ -17,5 +17,7 @@ namespace GraphTheoryFinalOne.Models
 
         public int N { get; set; }
         public LinkedList<int>[] AdjacentVertices { get; set; }
+
+        public int BridgeVertice { get; set; }
     }
 }

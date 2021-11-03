@@ -17,7 +17,7 @@ namespace GraphTheoryFinalOne
                 Console.WriteLine($"1. Do thi trong: {isEmptyGraph}");
                 var isCycleGraph = GraphBiz.IsCycleGrap(adjLst) ? $"k = {adjLst.N}" : "Khong";
                 Console.WriteLine($"2. Do thi vong: {isCycleGraph}");
-                var isButterflyGraph = GraphBiz.IsButterflyGraph(adjLst) ? $"Co" : "Khong";
+                var isButterflyGraph = GraphBiz.IsButterflyOrFriendshipGraph(adjLst) && adjLst.N == 5 ? $"Co" : "Khong";
                 Console.WriteLine($"3. Do thi hinh con buom: {isButterflyGraph}");
                 var isMothGraph = GraphBiz.IsMothGraph(adjLst) ? $"Co" : "Khong";
                 Console.WriteLine($"4. Do thi hinh con ngai: {isMothGraph}");
@@ -25,8 +25,10 @@ namespace GraphTheoryFinalOne
                 Console.WriteLine($"5. Do thi hinh sao: {isStarGraph}");
                 var isWheelGraph = GraphBiz.IsWheelGraph(adjLst) ? $"k = {adjLst.N}" : "Khong";
                 Console.WriteLine($"6. Do thi banh xe: {isWheelGraph}");
-                Console.WriteLine($"7. Do thi Barbell: Khong");
-                Console.WriteLine($"8. Do thi tinh ban: Khong");
+                var isBarbellGraph = GraphBiz.IsBarbellGraph(adjLst) ? $"Co (n = {adjLst.N / 2})" : "Khong";
+                Console.WriteLine($"7. Do thi Barbell: {isBarbellGraph}");
+                var isFriendshipGraph = GraphBiz.IsButterflyOrFriendshipGraph(adjLst) && adjLst.N > 5 ? $"Co" : "Khong";
+                Console.WriteLine($"8. Do thi tinh ban: {isFriendshipGraph}");
                 Console.WriteLine($"9. Do thi k-phan (k > 1): Khong");
 
                 Console.WriteLine();

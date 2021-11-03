@@ -1,4 +1,6 @@
 ﻿using GraphTheoryFinalOne.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GraphTheoryFinalOne.Handlers
 {
@@ -20,7 +22,7 @@ namespace GraphTheoryFinalOne.Handlers
         }
         public static bool IsCycleGrap(AdjacencyList adjacencyList)
         {
-            if (IsEmptyGraph(adjacencyList))
+            if (IsEmptyGraph(adjacencyList) && IsCompletedGraph(adjacencyList))
                 return false;
 
             // Get Degree
@@ -44,9 +46,9 @@ namespace GraphTheoryFinalOne.Handlers
 
         }
 
-        public static bool IsButterflyGraph(AdjacencyList adjacencyList)
+        public static bool IsButterflyOrFriendshipGraph(AdjacencyList adjacencyList)
         {
-            if (IsEmptyGraph(adjacencyList) || adjacencyList.N < 5)
+            if (IsEmptyGraph(adjacencyList) || adjacencyList.N < 5 || adjacencyList.N % 2 == 0)
                 return false;
 
             int vertexD2 = 0;
@@ -86,7 +88,6 @@ namespace GraphTheoryFinalOne.Handlers
             }
 
             return vertexD3 == (adjacencyList.N - 1) && vertexDn_1 == 1;
-
         }
 
         public static bool IsStarGraph(AdjacencyList adjacencyList)
@@ -153,6 +154,49 @@ namespace GraphTheoryFinalOne.Handlers
             return vertex1 == 2 && vertex2 == 2 && vertex3 == 1 && vertex5 == 1;
         }
 
+        public static bool IsBarbellGraph(AdjacencyList adjacencyList)
+        {
+            if (IsEmptyGraph(adjacencyList) || adjacencyList.N < 6 || (adjacencyList.N > 6 && adjacencyList.N % 2 != 0))
+                return false;
+
+            int nMaxDegree = adjacencyList.N / 2;
+            AdjacencyList list1 = new AdjacencyList(nMaxDegree);
+            AdjacencyList list2 = new AdjacencyList(nMaxDegree);
+
+            var count = 0;
+            int el = 0;
+            var max = 0;
+            max = adjacencyList.AdjacentVertices[0].Count;
+            list1.BridgeVertice = el;
+
+            foreach (var adj in adjacencyList.AdjacentVertices)
+            {
+                count++;
+                if (count <= nMaxDegree)
+                {
+                    list1.AdjacentVertices[el] = adj;
+                    if (adj.Count > max)
+                    {
+                        max = adj.Count;
+                        list1.BridgeVertice = el;
+                    }
+                }
+                else
+                {
+                    el = nMaxDegree == count - 1 ? 0 : el;
+                    list2.AdjacentVertices[el] = adj;
+                    if (adj.Count >= max)
+                    {
+                        max = adj.Count;
+                        list2.BridgeVertice = el + nMaxDegree;
+                    }
+                }
+                el++;
+            }
+
+            return IsCompletedGraph(list1) && IsCompletedGraph(list2) && HasBridgeEdge(list1, list2);
+        }
+
         #region Support Function
         public static bool IsUndirectedGraph(AdjacencyList adjacencyList)
         {
@@ -208,6 +252,7 @@ namespace GraphTheoryFinalOne.Handlers
 
             return result;
         }
+
         private static int[] CountDegrees(AdjacencyList adjacencyList)
         {
             int[] degrees = new int[adjacencyList.N];
@@ -222,6 +267,34 @@ namespace GraphTheoryFinalOne.Handlers
             }
 
             return degrees;
+        }
+
+        private static int TotalOfEdges(AdjacencyList adjacencyList)
+        {
+            return adjacencyList.N * (adjacencyList.N - 1) / 2;
+        }
+
+        private static bool IsCompletedGraph(AdjacencyList adjacencyList)
+        {
+            var degrees = CountDegrees(adjacencyList);
+
+            if (degrees.Length == 0)
+                return false;
+
+            var totalEdges = TotalOfEdges(adjacencyList);
+
+            var totalDegree = 0;
+            for (int i = 0; i < degrees.Length; i++)
+                totalDegree += degrees[i];
+
+            return totalDegree / 2 == totalEdges;
+        }
+
+        private static bool HasBridgeEdge(AdjacencyList graph1, AdjacencyList graph2)
+        {
+            return (graph1.AdjacentVertices[0].Count == graph2.AdjacentVertices[0].Count) &&
+                        (graph1.AdjacentVertices[0].Contains(graph2.BridgeVertice) && 
+                                        graph2.AdjacentVertices[0].Contains(graph1.BridgeVertice));
         }
         #endregion
     }
