@@ -1,4 +1,5 @@
 ﻿using GraphTheoryFinalOne.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -28,7 +29,14 @@ namespace GraphTheoryFinalOne.Handlers
             // Get Degree
             DegreeArray = CountDegrees(adjacencyList);
 
-            if (adjacencyList == null || adjacencyList.N < 3 || !IsRegularGraph() || (DegreeArray.Length > 0 && DegreeArray[0] != 2))
+            //check degree on each vertice 
+            for (int i = 0; i < DegreeArray.Length; i++)
+            {
+                if (DegreeArray[i] > 2)
+                    return false;
+            }
+
+            if (adjacencyList == null || adjacencyList.N < 3 || !IsRegularGraph())
                 return false;
 
             bool[] visited = new bool[adjacencyList.N];
@@ -140,13 +148,13 @@ namespace GraphTheoryFinalOne.Handlers
 
                 if (degreeI == 1)
                     vertex1++;
-                
+
                 if (degreeI == 1)
                     vertex2++;
-                
+
                 if (degreeI == 3)
                     vertex3++;
-                
+
                 if (degreeI == 5)
                     vertex5++;
             }
@@ -195,6 +203,31 @@ namespace GraphTheoryFinalOne.Handlers
             }
 
             return IsCompletedGraph(list1) && IsCompletedGraph(list2) && HasBridgeEdge(list1, list2);
+        }
+
+        public static string CheckKPartiteGraph(AdjacencyList adjacencyList)
+        {
+            if (IsEmptyGraph(adjacencyList))
+                return "Khong";
+
+            List<KPartiteGraph> kPartiteGraphs = new List<KPartiteGraph>();
+            int el = 0;
+
+            //Get potential for a vertice which can connect to another verice
+            foreach (var vertice in adjacencyList.AdjacentVertices)
+            {
+                if (vertice.Count == adjacencyList.N - 1)
+                    kPartiteGraphs.Add(new KPartiteGraph { StartVertice = el });
+                else
+                {
+                    for (int i = 0; i < vertice.Count; i++){
+
+                    }
+                }
+                el++;
+            }
+
+            return kPartiteGraphs.Count > 1 ? "Co" : "Khong";
         }
 
         #region Support Function
@@ -293,9 +326,15 @@ namespace GraphTheoryFinalOne.Handlers
         private static bool HasBridgeEdge(AdjacencyList graph1, AdjacencyList graph2)
         {
             return (graph1.AdjacentVertices[0].Count == graph2.AdjacentVertices[0].Count) &&
-                        (graph1.AdjacentVertices[0].Contains(graph2.BridgeVertice) && 
+                        (graph1.AdjacentVertices[0].Contains(graph2.BridgeVertice) &&
                                         graph2.AdjacentVertices[0].Contains(graph1.BridgeVertice));
         }
         #endregion
     }
+}
+
+public class KPartiteGraph 
+{
+    public int StartVertice { get; set; }
+    public int EndVertice { get; set; }
 }

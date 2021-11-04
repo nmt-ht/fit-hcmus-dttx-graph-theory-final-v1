@@ -29,6 +29,7 @@ namespace GraphTheoryFinalOne
                 Console.WriteLine($"7. Do thi Barbell: {isBarbellGraph}");
                 var isFriendshipGraph = GraphBiz.IsButterflyOrFriendshipGraph(adjLst) && adjLst.N > 5 ? $"Co" : "Khong";
                 Console.WriteLine($"8. Do thi tinh ban: {isFriendshipGraph}");
+                var checkKPartiteGraph = GraphBiz.CheckKPartiteGraph(adjLst);
                 Console.WriteLine($"9. Do thi k-phan (k > 1): Khong");
 
                 Console.WriteLine();
