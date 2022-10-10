@@ -1,2 +1,2 @@
-# graph-theory-final-1
-FIT - Graph theory final 1
+# graph-theory-final-v1
+FIT - Graph theory final v1
